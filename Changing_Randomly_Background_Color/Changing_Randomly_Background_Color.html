@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<title>Programming Challenge 6</title>
+	</head>
+	<body id="demo">
+		<div style="width: 700px; margin: auto; margin-top: 100px; border: 1px solid black; padding: 5px; background-color: #E7E7E7;">
+			<p id="text">Power is of two kinds. One is obtained by the fear of punishment and <a href="JavaScript:void(0)" onclick="readMore()">more...</a>
+
+			<br /><hr />
+			<a href="JavaScript:void(0)" onclick="changeCycle = setInterval(changeBgCol, 1000)">Change Background Color</a>&nbsp;&nbsp;&nbsp; Color Hex Value:<span id="color"></span><br />
+			<a href="JavaScript:void(0)" onclick="clearInterval(changeCycle)">Stop Changing Background Color</a><br />			
+		</div>
+	
+	<script>
+	
+	function readMore() {
+		var moreText = "Power is of two kinds. One is obtained by the fear of punishment and the other by acts of love. Power based on love is a thousand times more effective and permanent then the one derived from fear of punishment.<br/><b>Mahatma Gandhi</b><br/><a href='JavaScript:void(0)' onclick='readLess()'>less...</a>";
+		document.getElementById("text").innerHTML = moreText;
+	}
+	
+	function readLess() {
+		var lessText = "Power is of two kinds. One is obtained by the fear of punishment and <a href='JavaScript:void(0)' onclick='readMore()'>more...</a>";
+		document.getElementById("text").innerHTML = lessText;
+	}
+	
+	function changeBgCol() {
+		
+		var backBgCol = ["#96ceb4", "#ffeead", "#ffcc5c", "#ff6f69", "#5b9aa0", "#b8a9c9"]
+		
+		var x = Math.random()
+		x = Math.floor(x * 6);
+		
+		document.getElementById("demo").style.backgroundColor = backBgCol[x];
+		document.getElementById("color").innerHTML = backBgCol[x];
+	}
+	
+	</script>
+	
+	
+	</body>
+</html>
+
+ 
