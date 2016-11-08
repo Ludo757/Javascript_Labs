@@ -1,0 +1,40 @@
+<html>
+<head>
+	<title>The Magic Square</title>
+</head>
+<body>
+	<div style="width: 700px; margin: auto; margin-top: 10px; border: 1px solid black; padding: 5px;">
+		<p style="font-weight: bold;">Lab 4: Programming Challenge</p>
+		<p>This page will allow the user to fill a 3 X 3 table with numbers and it will check to see if those numbers form a magic square. A magic square exists when all the rows, columns, and diagonals of a nXn square add up to the same number.</p>
+		<p>
+		<input type ="button" onclick="magicSquare()" value = "Enter your numbers">
+		</p>
+		<table width = "60%" align = "center" border = "1">
+			<tr>
+				<td width = "20%" height = "60" align = "center"><span id = "cell00">cell 00</span>&nbsp;</td>
+				<td width = "20%" height = "60" align = "center"><span id = "cell01" />cell 01</span>&nbsp;</td>
+				<td width = "20%" height = "60" align = "center"><span id = "cell02" />cell 02</span>&nbsp;</td>
+			</tr>
+			<tr>
+				<td width = "20%" height = "60" align = "center"><span id = "cell10" />cell 10</span>&nbsp;</td>
+				<td width = "20%" height = "60" align = "center"><span id = "cell11" />cell 11</span>&nbsp;</td>
+				<td width = "20%" height = "60" align = "center"><span id = "cell12" />cell 12</span>&nbsp;</td>
+			</tr>
+			<tr>
+				<td width = "20%" height = "60" align = "center"><span id = "cell20" />cell 20</span>&nbsp;</td>
+				<td width = "20%" height = "60" align = "center"><span id = "cell21" />cell 21</span>&nbsp;</td>
+				<td width = "20%" height = "60" align = "center"><span id = "cell22" />cell 22</span>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan = "3">
+				<p>
+				<input type ="button" onclick="checkIt()" value = "Check if you've entered a magic square">
+				</p>
+				</td>
+			</tr>
+		</table>
+		<span>Result: <strong></span><span id ="result">&nbsp;</span></strong>
+	</div>
+	<script src="myfile4.js"></script>
+</body>
+</html>
