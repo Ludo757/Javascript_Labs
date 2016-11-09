@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<head>
+  <title>Student's Information</title>
+</head>
+
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+
+tr.odd{
+    background-color: #F0F8FF;
+    }
+tr.even{
+    background-color: #FAEBD7;
+    }
+    
+th {
+    background-color: #00FFFF;
+    }
+
+td.bad{
+    color: red;
+    }
+
+table.input, tr.input, td.input {
+	border: none;
+} 
+</style>
+
+<body>
+
+	<table class="input" align ="center" width ="70%" >
+		<tr class="input">
+			<td colspan ="2" class="input">
+				<h1>&nbsp;</h1>
+				<h1>Student's Information</h1>
+				<p><input type="button" id="students" value="Enter Data" onclick="doTheMagic()"/></p>
+			</td>
+		</tr>
+	</table>
+	
+	<br />
+	<br />
+	<br />
+	
+	<div id="display"></div>
+	
+	<script>
+		
+		var trCount;
+		var tdCount = 8;
+
+		var headRow = "<tr>" +
+						"<th>Name</th>" +
+						"<th>Attendance</th>" +
+						"<th>Homework</th>" +
+						"<th>Midterm</th>" +
+						"<th>Final</th>" +
+						"<th>Course Grade</th>" +
+						"<th>Round Grade</th>" +
+						"<th>Letter Grade</th>" +
+						"</tr>";
+						
+		var newTable = "<table>" + headRow;
+        
+		var studentInfo = [];
+		
+		
+		//Main function
+		function doTheMagic() {
+			
+			askInputs();
+			createNewTable(trCount);
+			document.getElementById("display").innerHTML = newTable;
+			
+		}
+		
+		// Asking and storing the inputs then doing the maths
+		function askInputs() {
+
+			trCount = prompt("How many students in this class?", "2");
+			trCount = parseInt(trCount);
+			
+            for (var i = 0; i < trCount; i++) {
+			
+			var name = prompt("Enter the student's name", "Joe");
+			var attend = prompt("Enter her/his attendance grade", "90");
+            attend = parseInt(attend);
+			var hw = prompt("Enter her/his homework grade", "100");
+            hw = parseInt(hw);
+			var midTerm = prompt("Enter her/his midterm exam grade", "100");
+            midTerm = parseInt(midTerm);
+			var finalGr = prompt("Enter her/his final exam grade", "90");
+            finalGr = parseInt(finalGr);
+			
+            var courseGr = (midTerm * 0.3) + (finalGr * 0.4) + (hw * 0.2) + (attend * 0.1);
+            courseGr = courseGr.toFixed(2); 
+            var roundGr = Math.round(courseGr);
+            var letterGr;
+            
+            if (courseGr >= 90) {
+			    letterGr = "A";
+			  }
+			  else if (courseGr >= 80 && courseGr <= 89.9){
+			    letterGr = "B";
+			  }
+			  else if (courseGr >= 70 && courseGr <= 79.9){
+			    letterGr = "C";
+			  }
+			  else if (courseGr >= 60 && courseGr <= 69.9){
+			    letterGr = "D";
+			  }
+			  else if (courseGr < 60) {
+			    letterGr = "F";
+			  }
+                
+            var tempInfo = [name, attend, hw, midTerm, finalGr, courseGr, roundGr, letterGr];
+            studentInfo[i] = tempInfo;
+            }
+            return trCount;
+            return studentInfo;	
+		}
+		
+		function createNewTable(trCount) {
+		
+		for (var i = 0; i < trCount; i++) {
+			
+            // First If/Else checks if row is even or odd
+            if (i % 2 === 0) {
+            newTable += "<tr class='odd'>";
+            
+                for (var j = 0; j < tdCount - 1; j++) {
+				newTable += "<td>" + studentInfo[i][j] + "</td>";
+			     }
+                
+                //Second If/Else checks if grade F
+                if (studentInfo[i][7] === "F") {
+                    newTable += "<td class='bad'>" + studentInfo[i][7] + "</td>";
+                }
+                else {
+                    newTable += "<td>" + studentInfo[i][7] + "</td>";
+                }
+            newTable += "</tr>";
+            }
+			
+            // First If/Else checks if row is even or odd
+            else {
+			newTable += "<tr class='even'>";
+                
+                for (var j = 0; j < tdCount -1 ; j++) {
+				newTable += "<td>" + studentInfo[i][j] + "</td>";
+			     }
+                
+                //Second If/Else checks if grade F
+                if (studentInfo[i][7] === "F") {
+                    newTable += "<td class='bad'>" + studentInfo[i][7] + "</td>";
+                }
+                else {
+                    newTable += "<td>" + studentInfo[i][7] + "</td>";
+                }
+            }
+            newTable += "</tr>";
+		}
+		newTable += "</table>";
+		}
+		
+	</script>
+	
+</body>
+</html>
+
