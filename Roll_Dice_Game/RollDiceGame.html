@@ -1,0 +1,178 @@
+<html>
+<!--		
+Description:
+    Dice game
+        - If one player rolls doubles (i.e., two fours or two sixes, etc.) and is a winner for that round, he or she should get double points.
+        - If one player rolls doubles but is not a winner, nothing special happens.
+        - If the two sums for any round are a tie, no one gets any points.
+        - The game ends when either player reaches at least 100 points. Once there is a winner, the game starts again.
+-->
+	<head>
+		<title>
+			Dice Game!
+		</title>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+		<div class="container">
+		    <div class="heading">
+		        <div class="col">Human</div>
+		        <div class="col">&nbsp;</div>
+		        <div class="col">Computer</div>
+		        <div class="col">&nbsp;</div>
+		    </div>
+			<div class="table-row">
+	        	<div class="col">Dice 1</div>
+		    	<div class="col" id="playerDice1">&nbsp;</div>
+	        	<div class="col">Dice 1</div>
+		    	<div class="col" id="computerDice1">&nbsp;</div>
+		    </div>
+			<div class="table-row">
+		    	<div class="col">Dice 2</div>
+		    	<div class="col" id="playerDice2">&nbsp;</div>
+		    	<div class="col">Dice 2</div>
+		    	<div class="col" id="computerDice2">&nbsp;</div>
+		    </div>
+			<div class="table-row">
+		    	<div class="col">Dice Sum</div>
+		    	<div class="col" id="playerDiceSum">&nbsp;</div>
+		    	<div class="col">Dice Sum</div>
+		    	<div class="col" id="computerDiceSum">&nbsp;</div>
+		    </div>
+			<div class="table-row">
+		    	<div class="col">Total Score</div>
+		    	<div class="col" id="playerScore">&nbsp;</div>
+		    	<div class="col">Total Score</div>
+		    	<div class="col" id="computerScore">&nbsp;</div>
+		    </div>
+		</div>
+		<h3 id="msg1">&nbsp;</h3>
+		<input type="button" id="myButton" onClick="main()" value="Let's Roll!" />
+
+		<script type="text/javascript">
+			//Global variable declaration
+			var playerScore = 0;
+			var computerScore = 0;
+			var message = "???";
+
+			function rollDice()
+			{
+				//This function returns a random number between 1 and 6
+                
+                var randNum = Math.floor((Math.random() * 6) + 1);
+                return randNum;
+
+			}
+
+			function displayDice(diceValue)
+			{
+				//This function takes a parameter (diceValue) to return an <img ..../> tag code
+                
+                var diceImage = "<img src='images/" + diceValue + ".png'>";
+                return diceImage;
+
+			}
+
+			function result(pds,cds,pd1,pd2,cd1,cd2)
+			{
+				//This function takes 6 parameters (pds,cds,pd1,pd2,cd1,cd2) to find out who wins the round,
+				//gets double points, assigns proper message and keeps track of player's and computer's score
+                
+                
+                //Human winner with no doubles
+                if ((pds > cds) && (pd1 !== pd2) && (cd1 !== cd2)) {
+                    message = "Human wins this round.";
+                    playerScore += pds;
+                }
+                
+                //Computer winner with no doubles
+                else if ((pds < cds) && (pd1 !== pd2) && (cd1 !== cd2)) {
+                    message = "Computer wins this round.";
+                    computerScore += cds;
+                }
+                
+                //Human winner with doubles
+                else if ((pd1 === pd2) && (pds > cds)) {
+                    message = "Human wins this round with a double score.";
+                    playerScore += pds * 2;
+                }
+                
+                //Computer winner with doubles
+                else if ((cd1 === cd2) && (cds > pds)) {
+                    message = "Computer wins this round with a double score.";
+                    computerScore += cds * 2;
+                }
+                
+                //Human with doubles but no winner
+                else if ((pd1 === pd2) && (pds < cds)) {
+                    message = "Human rolled doubles but is not a winner. No body wins this round.";
+                }
+                
+                //Computer with doubles but no winner
+                else if ((cd1 === cd2) && (pds > cds)) {
+                    message = "Computer rolled doubles but is not a winner. No body wins this round.";
+                }
+                
+                //Tie
+                else if (pds == cds) {
+                    message = "This round is a tie. Let's roll again.";
+                }
+			}
+
+			function winner(ps,cs)
+			{
+				//This function determines who is the game's winner base on a 100 or more points
+				//it takes 2 parameters - player's score, computer's score
+				//it updates the global variables (resets scores and assigns proper message)
+                
+                if ((ps >= 100) && (cs <= 100)) {
+                    message = "Human wins the game!";
+                    playerScore = 0;
+			        computerScore = 0;
+                }
+                
+                else if ((ps <= 100) && (cs >= 100)) {
+                    message = "Computer wins the game!";
+                    playerScore = 0;
+			        computerScore = 0;
+                }
+			}
+
+			function main()
+			{
+				//This function calls the following functions: rollDice(), result(), displayDice() and winner()
+
+				var playerDice1 = rollDice();
+				var playerDice2 = rollDice();
+				var computerDice1 = rollDice(); 
+				var computerDice2 = rollDice();
+				var playerDiceSum = playerDice1 + playerDice2;
+				var computerDiceSum = computerDice1 + computerDice2;
+				
+				result(playerDiceSum,computerDiceSum,playerDice1,playerDice2,computerDice1,computerDice2);
+
+				document.getElementById('playerDice1').innerHTML = displayDice(playerDice1);
+				document.getElementById('playerDice2').innerHTML = displayDice(playerDice2);
+				document.getElementById('computerDice1').innerHTML = displayDice(computerDice1);
+				document.getElementById('computerDice2').innerHTML = displayDice(computerDice2);
+
+				document.getElementById('playerDiceSum').innerHTML = playerDiceSum;
+				document.getElementById('computerDiceSum').innerHTML = computerDiceSum;
+
+				document.getElementById('playerScore').innerHTML = playerScore;
+				document.getElementById('computerScore').innerHTML = computerScore;
+				
+				winner(playerScore,computerScore);
+
+				document.getElementById('msg1').innerHTML = message;
+			}
+
+			// I chose to comment out the line below so the game doesn't start until the user clicks the button.
+            // Consequently, I also added line 181.
+            //main();
+            
+            document.getElementById('msg1').innerHTML = "Hit the 'Lets Roll!!' button to start the game.";
+            
+		</script>
+	</body>
+</html>
