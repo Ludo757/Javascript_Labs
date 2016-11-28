@@ -1,0 +1,79 @@
+<html>
+<head>
+	<title>Lab 10b</title>
+</head>
+<body>
+
+<canvas id=pane width=800 height=800 style="border:2px solid #000000;"></canvas> 
+
+    <script> 
+        
+		var c = document.getElementById('pane').getContext('2d'); 
+		
+		//Green Base
+		c.fillStyle = "green";
+		c.fillRect(200, 400, 400, 400);
+		
+		//Red roof
+		c.beginPath();
+		c.moveTo(200, 400);
+		c.lineTo(400, 200);
+		c.lineTo(600, 400);
+		c.closePath();
+		c.stroke();
+		
+		c.fillStyle = "red";
+		c.fill();
+		
+		//Door frame brown
+		c.fillStyle = "brown";
+		c.fillRect(350, 650, 100, 150);
+		
+		//Door knob gray
+		c.beginPath();
+		c.fillStyle = "gray";
+		c.arc(370,740,10,0,2*Math.PI);
+		c.stroke();
+		c.fill();
+		
+		//Windows
+		c.fillStyle = "skyblue";
+		c.fillRect(250, 450, 100, 100);
+		c.fillRect(450, 450, 100, 100);
+		
+		c.beginPath();
+		c.moveTo(250, 500);
+		c.lineTo(350, 500);
+		c.closePath();
+		c.lineWidth="10";
+		c.strokeStyle="white";
+		c.stroke();
+		
+		c.beginPath();
+		c.moveTo(450, 500);
+		c.lineTo(550, 500);
+		c.closePath();
+		c.lineWidth="10";
+		c.strokeStyle="white";
+		c.stroke();
+		
+		c.beginPath();
+		c.moveTo(300, 450);
+		c.lineTo(300, 550);
+		c.closePath();
+		c.lineWidth="10";
+		c.strokeStyle="white";
+		c.stroke();
+		
+		c.beginPath();
+		c.moveTo(500, 450);
+		c.lineTo(500, 550);
+		c.closePath();
+		c.lineWidth="10";
+		c.strokeStyle="white";
+		c.stroke();
+	
+	</script>
+	
+</body>
+</html>

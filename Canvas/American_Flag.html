@@ -1,0 +1,52 @@
+<html>
+<head>
+	<title>Lab 10c</title>
+</head>
+<body>
+
+<canvas id=pane width=750 height=455 style="border:2px solid #000000;"></canvas> 
+
+    <script> 
+        
+	var c = document.getElementById('pane').getContext('2d'); 
+	
+	//Stripes
+	function drawRect(x, y, w, h) {
+		c.fillStyle = "red";
+		c.fillRect(x, y, w, h);
+	}
+	
+	for (var i = 0; i < 7; i++) {
+		var x = 70 * i;
+		drawRect(0, x, 750, 35);
+	}
+	
+	//Top Left Blue Rectangle
+	c.fillStyle = "blue";
+	c.fillRect(0, 0, 320, 245);
+
+	//Stars	8 x 6
+	c.fillStyle = "gold";
+	var size = 40;
+
+	for (var i = 0; i < 8; i++) {
+		for (var j = 0; j < 6; j++) {
+			fillStar(i * size, j * size, size);
+		}
+	}
+
+	function fillStar(x, y, s) {
+		c.beginPath();
+		c.moveTo(x, y + s * 0.4);
+		c.lineTo(x + s, y + s * 0.4);
+		c.lineTo(x + s * 0.15, y + s * 0.9);
+		c.lineTo(x + s / 2, y);
+		c.lineTo(x + s * 0.85, y + s * 0.9);
+		c.lineTo(x, y + s * 0.4);
+		c.fill();
+	}
+		
+	</script>
+	
+</body>
+</html>

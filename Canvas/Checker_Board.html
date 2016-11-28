@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <title>My Game Board</title>
+    </head>
+    <body> 
+    <canvas id=pane width=800 height=800 style="border:1px solid #000000;"></canvas> 
+    <script> 
+        //code goes here...
+		var c = document.getElementById('pane').getContext('2d');
+        
+        var size = 100;
+        var color1 = "red";
+        var color2 = "black";
+        var color3 = "blue";
+        var color4 = "green";
+        
+        //Draws the red background squares
+        for (var i = 0; i < 4; i++) {
+            for (var j = 0; j < 4; j++) {
+                var x = i * 2 * size;
+                var y = j * 2 * size;
+                fillSquare(x, y, size, color1);
+                x += size;
+                y += size;
+                fillSquare(x, y, size, color1);
+            }
+        }
+        
+        //Draws the black background squares
+        for (var i = -1; i < 4; i++) {
+            for (var j = 0; j < 4; j++) {
+                var x = i * 2 * size + 100;
+                var y = j * 2 * size;
+                fillSquare(x, y, size, color2);
+                x += size;
+                y += size;
+                fillSquare(x, y, size, color2);
+            }
+        }
+    
+        //Draws the blue checkers on the first 3 rows
+        for (var i = 0; i < 4; i++) {
+            var x = 150 + 200 * i;
+            var y = 50;
+            fillCheckers(x, y, color3);
+        }
+        
+        for (var i = 0; i < 4; i++) {
+            var x = 50 + 200 * i;
+            var y = 150;
+            fillCheckers(x, y, color3);
+        }
+        
+        for (var i = 0; i < 4; i++) {
+            var x = 150 + 200 * i;
+            var y = 250;
+            fillCheckers(x, y, color3);
+        }
+        
+        //Draws the green checkers on the last 3 rows
+        for (var i = 0; i < 4; i++) {
+            var x = 50 + 200 * i;
+            var y = 750;
+            fillCheckers(x, y, color4);
+        }
+        
+        for (var i = 0; i < 4; i++) {
+            var x = 150 + 200 * i;
+            var y = 650;
+            fillCheckers(x, y, color4);
+        }
+        
+        for (var i = 0; i < 4; i++) {
+            var x = 50 + 200 * i;
+            var y = 550;
+            fillCheckers(x, y, color4);
+        }
+        
+        function fillSquare(x, y, s, color) {
+            c.fillStyle = color;
+            c.fillRect(x, y, size, size);
+        }
+        
+        function fillCheckers(x, y, color) {
+            c.beginPath();
+		    c.fillStyle = color;
+            //c.arc(50,50,40,0,2*Math.PI);
+            c.arc(x, y, 40, 0, 2*Math.PI);
+            c.fill();
+            c.lineWidth="1";
+            c.strokeStyle="white";
+            c.stroke();
+        }
+		
+    </script>
+    </body>
+</html> 
